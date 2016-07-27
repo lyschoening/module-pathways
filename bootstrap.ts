@@ -6,7 +6,7 @@ import 'angular-material';
 import 'angular-ui-router';
 // Turn of WS TS inspection for the 'decaf-common' import.
 // noinspection TypeScriptCheckImport
-import {sharing, config, utils, Config} from 'decaf-common';
+import {sharing, config, core, Config} from 'decaf-common';
 import {API_HOST, API_PREFIX} from './bootstrap.config';
 import main from 'src';
 
@@ -21,7 +21,7 @@ const app = angular.module('app', [
 	// Common
 	config.name,
 	sharing.name,
-	utils.name,
+	core.name,
 	// Component
 	main.name
 ]);
@@ -61,10 +61,20 @@ app.config(function ($urlMatcherFactoryProvider, $urlRouterProvider, $stateProvi
 
 // Main component
 class AppController {
-	constructor($window, private config: Config) {
+	isSidebarVisible = true;
+
+	// noinspection TypeScriptUnresolvedVariable
+	constructor($window, $scope, private config: Config) {
 		$window.document.title = `Platform – Component({name: ${main.name}})`;
 		// noinspection TypeScriptUnresolvedFunction
 		config.set('componentConfig', {});
+
+		// Hide sidebar if there is no navigation set from the component.
+		$scope.$on('$stateChangeStart', (toState, toParams) => {
+			if (!toParams || !toParams.hasOwnProperty('views') || !toParams.views.hasOwnProperty('navigation@')) {
+				this.isSidebarVisible = false;
+			}
+		});
 	}
 
 	// Update color from config
@@ -89,7 +99,7 @@ app.component('app', {
 	},
 	template: `
 		<div layout="row" flex ui-view="root">
-			<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+			<md-sidenav ng-if="app.isSidebarVisible" layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 				<div ng-transclude="navigation"></div>
 				<div ui-view="navigation"></div>
 			</md-sidenav>
