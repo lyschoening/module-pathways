@@ -1,10 +1,10 @@
-# Decaf Frontend Module
-> Decaf frontend component example project.
+# Decaf Frontend Module - Heterologous Pathways
+> Decaf frontend component.
 
-### Setup
+### Development setup
 ---------
 Install deps:
-* `git clone https://github.com/biosustain/decaf-frontend-module-example`
+* `git clone https://github.com/DD-DeCaF/decaf-frontend-module-pathways`
 * `npm install`
 * `$(npm bin)/typings install`
 
