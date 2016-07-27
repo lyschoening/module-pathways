@@ -1,0 +1,1 @@
+{"version":3,"sources":["constants.ts"],"names":[],"mappings":";AAAa,oBAAY,GAAG,2BAA2B,CAAC","file":"constants.js","sourcesContent":["export const API_ROOT_URL = 'http://139.59.133.210/api';\n\n"],"sourceRoot":"/source/"}
