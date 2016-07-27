@@ -9,23 +9,6 @@ SystemJS.config({
 			"src": "./"
 		}
 	},
-	devConfig: {
-		"map": {
-			"escher-vis": "npm:escher-vis@1.4.4"
-		},
-		"packages": {
-			"npm:escher-vis@1.4.4": {
-				"map": {
-					"d3": "npm:d3@3.5.17",
-					"filesaverjs": "npm:filesaverjs@0.2.2",
-					"underscore": "npm:underscore@1.8.3",
-					"baconjs": "npm:baconjs@0.7.84",
-					"mousetrap": "npm:mousetrap@1.6.0",
-					"vkbeautify": "npm:vkbeautify@0.99.1"
-				}
-			}
-		}
-	},
 	packages: {
 		"src": {
 			"defaultExtension": "js",
@@ -52,6 +35,7 @@ SystemJS.config({
 		"css": "github:systemjs/plugin-css@0.1.23",
 		"d3": "npm:d3@3.5.6",
 		"decaf-common": "github:biosustain/decaf-frontend-common@master",
+		"escher-vis": "npm:escher-vis@1.4.4",
 		"events": "github:jspm/nodelibs-events@0.2.0-alpha",
 		"fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
 		"http": "github:jspm/nodelibs-http@0.2.0-alpha",
@@ -313,6 +297,16 @@ SystemJS.config({
 		"github:twbs/bootstrap@3.3.7": {
 			"map": {
 				"jquery": "npm:jquery@2.2.4"
+			}
+		},
+		"npm:escher-vis@1.4.4": {
+			"map": {
+				"baconjs": "npm:baconjs@0.7.84",
+				"filesaverjs": "npm:filesaverjs@0.2.2",
+				"mousetrap": "npm:mousetrap@1.6.0",
+				"underscore": "npm:underscore@1.8.3",
+				"d3": "npm:d3@3.5.17",
+				"vkbeautify": "npm:vkbeautify@0.99.1"
 			}
 		}
 	}
