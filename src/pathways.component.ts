@@ -2,7 +2,7 @@
 // noinspection TypeScriptCheckImport
 import {Config, dirname} from 'decaf-common';
 import './pathways.component.css!';
-import 'escher-vis/css/dist/builder.css!';
+import './escher-builder.css!';
 import 'jquery';
 import escher, {EscherService} from './escher.service';
 import pathways, {PathwaysService} from './pathways.service';

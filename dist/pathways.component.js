@@ -3,7 +3,7 @@
 // noinspection TypeScriptCheckImport
 var decaf_common_1 = require('decaf-common');
 require('./pathways.component.css!');
-require('escher-vis/css/dist/builder.css!');
+require('./escher-builder.css!');
 require('jquery');
 var escher_service_1 = require('./escher.service');
 var pathways_service_1 = require('./pathways.service');
