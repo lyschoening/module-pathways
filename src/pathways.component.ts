@@ -39,7 +39,7 @@ interface FormConfig {
 
 class PathwaysController {
 	isDisabled: boolean;
-	waiting: boolean;
+	isWaiting: boolean;
 	models: any[];
 	universalModels: any[];
 	carbonSources: any[];
@@ -60,7 +60,7 @@ class PathwaysController {
 	constructor($timeout, PathwaysService: PathwaysService, EscherService: EscherService) {
 		this.$timeout = $timeout;
 		this.isDisabled = false;
-		this.waiting = false;
+		this.isWaiting = false;
 		this.models = [];
 		this.universalModels = [];
 		this.products = {};
@@ -185,32 +185,33 @@ class PathwaysController {
 		this.product = this.searchTexts.products;
 		this.universalModel = this.searchTexts.universalModels;
 		this.carbonSource = this.searchTexts.carbonSources;
-		this.waiting = true;
+		this.isWaiting = true;
 
 		let tick = () => {
 			this.pathwaysService
 				.getStatus(this.universalModel, this.model, this.carbonSource, this.product)
 				.then((statusResponse) => this.pathwaysService
 					.getPathways(this.universalModel, this.model, this.carbonSource, this.product)
-					.then((dataResponse) => [statusResponse.status, dataResponse.data]))
+					.then((dataResponse: any) => [statusResponse.status, dataResponse]))
 				.then(
 					// Success
-					([status, data]) => {
+					([status, dataResponse]) => {
+						let data: any[] = dataResponse.data;
 						for (var i = this.data.length; i < data.length; i += 1) {
 							this.data.push(data[i]);
 						}
 						if (status === 202) {
 							this.$timeout(tick, 1000);
 						} else {
-							this.waiting = false;
+							this.isWaiting = false;
 							if (data.length === 0) {
 								this.message = 'Pathways not found';
 							}
 						}
 					},
 					// Error
-					([status, data]) => {
-						this.waiting = false;
+					([status, dataResponse]) => {
+						this.isWaiting = false;
 						if (status === 404) {
 							this.message = 'No such key';
 						}

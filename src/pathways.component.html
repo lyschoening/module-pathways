@@ -1,5 +1,5 @@
 <div layout="row" layout-align="end">
-    <img src="assets/images/cameo_logo.png">
+    <img src="./assets/images/cameo_logo.png">
 </div>
 <md-content class="layout-padding" layout="column" ng-cloak>
     <div class="layout-padding">
@@ -26,7 +26,7 @@
             </md-button>
         </form>
     </div>
-    <!--<md-progress-linear ng-disabled="!pathwaysController.waiting" md-mode="indeterminate"></md-progress-linear>-->
+	<md-progress-linear ng-if="pathwaysController.isWaiting" md-mode="indeterminate"></md-progress-linear>
     <md-tabs  ng-if="pathwaysController.data.length > 0" md-dynamic-height md-border-bottom>
         <md-tab ng-repeat="(key, value) in pathwaysController.data">
             <md-tab-label>
@@ -39,9 +39,9 @@
                         {{ reaction_index + 1 }})
                         <b>{{ value.primary_nodes[reaction_index].name }}</b>: {{ reaction.reaction_string }}
                     </md-content>
-                    <md-button class="md-raised md-cornered" ng-click="pathwaysController.escherService.buildMap(value, pathwaysController.map_id_prefix + '_' + key)">Build reactions graph</md-button>
+                    <md-button class="md-raised md-cornered" ng-click="pathwaysController.escherService.buildMap(value, pathwaysController.mapIdPrefix + '_' + key)">Build reactions graph</md-button>
                     <figure>
-                        <div id="{{pathwaysController.map_id_prefix}}_{{key}}" style="height: 800px; width: 800px"></div>
+                        <div id="{{pathwaysController.mapIdPrefix}}_{{key}}" style="height: 800px; width: 800px"></div>
                     </figure>
                 </md-content>
                 <md-content ng-if="value.reactions.length != value.model.reactions.length" class="layout-padding" ng-repeat="reaction in value.model.reactions">
