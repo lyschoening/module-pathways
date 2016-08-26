@@ -20,7 +20,7 @@ var PathwaysService = (function () {
     PathwaysService.prototype.getStatus = function (universalModelId, modelId, carbonSourceId, productId) {
         return this.$http({
             method: 'GET',
-            url: "" + constants_1.API_ROOT_URL,
+            url: constants_1.API_ROOT_URL + "/predict",
             params: {
                 'product_id': productId,
                 'model_id': modelId,

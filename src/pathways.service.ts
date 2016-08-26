@@ -24,7 +24,7 @@ export class PathwaysService {
 	getStatus(universalModelId, modelId, carbonSourceId, productId) {
 		return this.$http({
 			method: 'GET',
-			url: `${API_ROOT_URL}`,
+			url: `${API_ROOT_URL}/predict`,
 			params: {
 				'product_id': productId,
 				'model_id': modelId,
