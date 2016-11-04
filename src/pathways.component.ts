@@ -4,13 +4,12 @@ import {Config, dirname} from 'decaf-common';
 import './pathways.component.css!';
 import './escher-builder.css!';
 import 'jquery';
-import escher, {EscherService} from './escher.service';
+import escherService, {EscherService} from './escher.service';
 import pathways, {PathwaysService} from './pathways.service';
-
 
 export const COMPONENT_NAME = 'pathways';
 const pathwaysModule = angular.module(COMPONENT_NAME, [
-	escher.name,
+	escherService.name,
 	pathways.name
 ]);
 

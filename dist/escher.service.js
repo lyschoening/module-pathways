@@ -1,9 +1,10 @@
 "use strict";
+/// <reference path="../typings/escher.d.ts"/>
+var escher = require('escher');
 // noinspection TypeScriptCheckImport
-var Builder = require('escher-vis').Builder;
 var d3 = require('d3');
 require('jquery');
-var escher = angular.module('pathways.escher', []);
+var escherService = angular.module('pathways.escher', []);
 var EscherService = (function () {
     function EscherService() {
         var _this = this;
@@ -71,13 +72,13 @@ var EscherService = (function () {
         var _this = this;
         data.primary_nodes.forEach(function (value) { return _this.metabolitesNames.push(value.name); });
         this.reactions = data.reactions;
-        Builder(null, this.alignReactions(data), null, d3.select('#' + controller_id), this.options);
+        escher.Builder(null, this.alignReactions(data), null, d3.select('#' + controller_id), this.options);
     };
     return EscherService;
 }());
 exports.EscherService = EscherService;
-escher.service('EscherService', EscherService);
+escherService.service('EscherService', EscherService);
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = escher;
+exports.default = escherService;
 
 //# sourceMappingURL=escher.service.js.map
