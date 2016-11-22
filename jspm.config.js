@@ -33,7 +33,7 @@ SystemJS.config({
 		"constants": "npm:jspm-nodelibs-constants@0.2.0",
 		"crypto": "npm:jspm-nodelibs-crypto@0.2.0",
 		"css": "github:systemjs/plugin-css@0.1.23",
-		"d3": "npm:d3@3.5.6",
+		"d3": "npm:d3@3.5.17",
 		"decaf-common": "github:biosustain/decaf-frontend-common@master",
 		"escher": "github:nkran/escher@master",
 		"escher-vis": "npm:escher-vis@1.4.4",
