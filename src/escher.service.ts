@@ -1,10 +1,11 @@
+/// <reference path="../typings/escher.d.ts"/>
+import * as escher from 'escher'
+
 // noinspection TypeScriptCheckImport
-const {Builder} = require('escher-vis');
 import * as d3 from 'd3';
 import 'jquery';
 
-const escher = angular.module('pathways.escher', []);
-
+const escherService = angular.module('pathways.escher', []);
 
 export class EscherService {
 	direction: number;
@@ -80,9 +81,9 @@ export class EscherService {
 			(value) => this.metabolitesNames.push(value.name)
 		);
 		this.reactions = data.reactions;
-		Builder(null, this.alignReactions(data), null, d3.select('#' + controller_id), this.options);
+		escher.Builder(null, this.alignReactions(data), null, d3.select('#' + controller_id), this.options);
 	}
 }
 
-escher.service('EscherService', EscherService);
-export default escher;
+escherService.service('EscherService', EscherService);
+export default escherService;
