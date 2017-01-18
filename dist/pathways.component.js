@@ -148,6 +148,23 @@ var PathwaysController = (function () {
             });
         }); });
     };
+    PathwaysController.prototype.mergeSimilarPathways = function (data) {
+        this.data = { 'broke': [] };
+        var name;
+        for (var i in data) {
+            if (data[i].reactions.length != data[i].model.reactions.length) {
+                name = 'broke';
+            }
+            else {
+                name = data[i].primary_nodes.map(function (x) { return x.name; }).join(' - ');
+            }
+            if (!this.data.hasOwnProperty(name)) {
+                this.data[name] = [];
+            }
+            this.data[name].push(data[i]);
+        }
+        return this.data;
+    };
     PathwaysController.prototype.submit = function () {
         var _this = this;
         this.data = [];
@@ -157,6 +174,7 @@ var PathwaysController = (function () {
         this.universalModel = this.searchTexts.universalModels;
         this.carbonSource = this.searchTexts.carbonSources;
         this.isWaiting = true;
+        this.isReady = false;
         var tick = function () {
             _this.pathwaysService
                 .getStatus(_this.universalModel, _this.model, _this.carbonSource, _this.product)
@@ -168,9 +186,8 @@ var PathwaysController = (function () {
             function (_a) {
                 var status = _a[0], dataResponse = _a[1];
                 var data = dataResponse.data;
-                for (var i = _this.data.length; i < data.length; i += 1) {
-                    _this.data.push(data[i]);
-                }
+                _this.mergeSimilarPathways(data);
+                _this.isReady = true;
                 if (status === 202) {
                     _this.$timeout(tick, 1000);
                 }

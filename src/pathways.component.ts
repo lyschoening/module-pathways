@@ -39,6 +39,7 @@ interface FormConfig {
 class PathwaysController {
 	isDisabled: boolean;
 	isWaiting: boolean;
+	isReady: boolean;
 	models: any[];
 	universalModels: any[];
 	carbonSources: any[];
@@ -177,6 +178,23 @@ class PathwaysController {
 			}));
 	}
 
+	mergeSimilarPathways(data) {
+		this.data = {'broke': []};
+		let name;
+		for (var i in data) {
+			if (data[i].reactions.length != data[i].model.reactions.length) {
+				name = 'broke';
+			} else {
+				name = data[i].primary_nodes.map((x) => x.name).join(' - ');
+			}
+			if (!this.data.hasOwnProperty(name)) {
+				this.data[name] = [];
+			}
+			this.data[name].push(data[i]);
+		}
+		return this.data;
+	}
+
 	submit() {
 		this.data = [];
 		this.message = '';
@@ -185,6 +203,7 @@ class PathwaysController {
 		this.universalModel = this.searchTexts.universalModels;
 		this.carbonSource = this.searchTexts.carbonSources;
 		this.isWaiting = true;
+		this.isReady = false;
 
 		let tick = () => {
 			this.pathwaysService
@@ -196,9 +215,8 @@ class PathwaysController {
 					// Success
 					([status, dataResponse]) => {
 						let data: any[] = dataResponse.data;
-						for (var i = this.data.length; i < data.length; i += 1) {
-							this.data.push(data[i]);
-						}
+						this.mergeSimilarPathways(data);
+						this.isReady = true;
 						if (status === 202) {
 							this.$timeout(tick, 1000);
 						} else {
