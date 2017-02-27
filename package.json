@@ -7,7 +7,7 @@
     "angular-fixed-table-header": "github:daniel-nagy/fixed-table-header",
     "d3": "^3.5.17",
     "escher-vis": "github:nkran/escher",
-    "iloop-frontend-core": "github:biosustain/iloop-frontend-core",
+    "metabolica": "github:biosustain/metabolica-ui",
     "jquery": "^3.1.1"
   },
   "scripts": {
